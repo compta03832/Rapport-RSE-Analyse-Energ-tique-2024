@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Audit RSE - Analyse Énergétique 2022-2024</title>
+    <!-- Inclure Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inclure la bibliothèque de graphiques Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Inclure la bibliothèque d'icônes Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- En-tête -->
+        <header class="bg-white p-8 rounded-xl shadow-md mb-8">
+            <div class="flex items-center justify-center mb-4">
+                <i data-lucide="leaf" class="h-10 w-10 text-green-600 mr-4"></i>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 text-center">Rapport d'Audit RSE</h1>
+            </div>
+            <p class="text-center text-xl text-gray-600">Analyse des consommations Électricité, Gaz & Eau 2022-2024</p>
+        </header>
+
+        <!-- ================================================================= -->
+        <!--                      SYNTHÈSE & CHIFFRES CLÉS                     -->
+        <!-- ================================================================= -->
+        <section id="synthese" class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b-4 border-gray-200 flex items-center">
+                <i data-lucide="bar-chart-3" class="h-8 w-8 mr-3 text-gray-600"></i>
+                Synthèse des Performances (Évolution 2022 vs 2024)
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Électricité -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center text-indigo-600 mb-2">
+                            <i data-lucide="zap" class="h-7 w-7 mr-2"></i>
+                            <h4 class="font-bold text-lg">Électricité</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Une maîtrise confirmée de nos consommations, preuve de l'efficacité de nos actions de sobriété sur le long terme.</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-green-700">-10,4%</p>
+                        <p class="text-gray-800 font-semibold">de réduction de la consommation</p>
+                        <p class="text-gray-500 text-sm">(de 47,3k à 42,3k kWh)</p>
+                    </div>
+                </div>
+                <!-- Card 2: Gaz -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center text-orange-600 mb-2">
+                            <i data-lucide="flame" class="h-7 w-7 mr-2"></i>
+                            <h4 class="font-bold text-lg">Gaz</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Nos efforts ont payé avec une baisse globale significative de la consommation sur la période.</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-green-700">-14,9%</p>
+                        <p class="text-gray-800 font-semibold">de réduction de la consommation</p>
+                        <p class="text-gray-500 text-sm">(de 77,1 à 65,6 MWh)</p>
+                    </div>
+                </div>
+                <!-- Card 3: Eau -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center text-sky-600 mb-2">
+                            <i data-lucide="wrench" class="h-7 w-7 mr-2"></i>
+                            <h4 class="font-bold text-lg">Eau</h4>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4">Notre vigilance a permis de détecter une anomalie majeure, démontrant la pertinence de notre suivi.</p>
+                    </div>
+                    <div>
+                        <p class="text-4xl font-bold text-red-600">+755%</p>
+                        <p class="text-gray-800 font-semibold">Anomalie de conso détectée</p>
+                        <p class="text-gray-500 text-sm">(de 10 à 85,5 m³)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!--                  ANALYSE DU POSTE ÉLECTRICITÉ                     -->
+        <!-- ================================================================= -->
+        <section id="electricite" class="mb-12">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-6 pb-2 border-b-4 border-indigo-200 flex items-center">
+                <i data-lucide="zap" class="h-8 w-8 mr-3"></i>
+                Analyse du Poste Électricité
+            </h2>
+
+            <!-- Acte 1: Le Constat -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 1 : Le Constat Annuel</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution du Coût Annuel (€)</h4>
+                        <canvas id="electriciteCostChart"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution de la Consommation Annuelle (kWh)</h4>
+                        <canvas id="electriciteConsumptionChart"></canvas>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 mt-6 italic">
+                    <strong>Le paradoxe :</strong> En 2023, la consommation baisse mais les coûts explosent. En 2024, la consommation remonte légèrement mais les coûts baissent. Pourquoi ?
+                </p>
+            </div>
+
+            <!-- Acte 2: L'Explication -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 2 : L'Explication par les Écarts</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Analyse 2022 → 2023 : La Maîtrise face à la Crise</h4>
+                        <canvas id="electriciteBridge2023"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Analyse 2023 → 2024 : La Baisse des Prix Aide</h4>
+                        <canvas id="electriciteBridge2024"></canvas>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 mt-6 italic">
+                    <strong>La réponse :</strong> Les graphiques en pont prouvent que nos efforts sur la consommation (Effet Conso) ont systématiquement joué en notre faveur, agissant comme un amortisseur face à la volatilité du marché (Effet Prix).
+                </p>
+            </div>
+            
+            <!-- Acte 3: Synthèse -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 3 : Synthèse & Recommandations (Électricité)</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <i data-lucide="shield-check" class="h-6 w-6 text-green-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-green-800">Succès de la Sobriété</h5>
+                            <p class="text-gray-700">Nos actions ont permis une baisse globale de la consommation de **10,4%** entre 2022 et 2024. Cet effort a généré une **économie structurelle** qui nous protège partiellement des hausses de prix.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                        <i data-lucide="alert-triangle" class="h-6 w-6 text-red-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-red-800">Impact de la Volatilité des Prix</h5>
+                            <p class="text-gray-700">Partant d'un coût de 6 501 € en 2022, la facture a grimpé à 11 113 € en 2023. Notre analyse montre que la flambée du prix unitaire est responsable d'un surcoût de **5 366 €**, masquant nos efforts. Sans notre baisse de consommation, la facture aurait été encore plus élevée.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <i data-lucide="bar-chart-2" class="h-6 w-6 text-blue-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-blue-800">Recommandation</h5>
+                            <p class="text-gray-700">Poursuivre et intensifier les actions de sobriété. C'est notre seul levier de contrôle pour maîtriser les coûts et renforcer notre résilience face à un marché qui restera instable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================================= -->
+        <!--                    ANALYSE DU POSTE GAZ                           -->
+        <!-- ================================================================= -->
+        <section id="gaz" class="mb-12">
+            <h2 class="text-3xl font-bold text-orange-600 mb-6 pb-2 border-b-4 border-orange-200 flex items-center">
+                <i data-lucide="flame" class="h-8 w-8 mr-3"></i>
+                Analyse du Poste Gaz
+            </h2>
+
+            <!-- Acte 1: Le Constat -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 1 : Le Constat Annuel</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution du Coût Annuel (€)</h4>
+                        <canvas id="gazCostChart"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution de la Consommation Annuelle (MWh)</h4>
+                        <canvas id="gazConsumptionChart"></canvas>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 mt-6 italic">
+                    <strong>Le défi :</strong> Malgré une forte baisse de la consommation en 2024, les coûts continuent d'augmenter. Comment l'expliquer ?
+                </p>
+            </div>
+
+            <!-- Acte 2: L'Explication -->
+            <div class="bg-white p-6 rounded-xl shadow-md mb-8">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 2 : L'Explication par les Écarts</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Analyse 2022 → 2023 : Baisse de Conso, Hausse des Prix</h4>
+                        <canvas id="gazBridge2023"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Analyse 2023 → 2024 : L'Effort Annulé par les Prix</h4>
+                        <canvas id="gazBridge2024"></canvas>
+                    </div>
+                </div>
+                <p class="text-center text-gray-600 mt-6 italic">
+                    <strong>La confirmation :</strong> L'Effet Prix est dévastateur sur ce poste. Notre effort majeur de réduction de consommation en 2024 (économie de 660€) a été plus qu'annulé par une nouvelle explosion du prix unitaire (surcoût de 1100€).
+                </p>
+            </div>
+            
+            <!-- Acte 3: Synthèse -->
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Acte 3 : Synthèse & Recommandations (Gaz)</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start p-4 bg-green-50 rounded-lg border-l-4 border-green-500">
+                        <i data-lucide="shield-check" class="h-6 w-6 text-green-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-green-800">Performance Opérationnelle Réussie</h5>
+                            <p class="text-gray-700">Nous avons réussi à baisser notre consommation chaque année, pour atteindre une **réduction globale de 14,9%** entre 2022 et 2024. C'est un succès majeur de notre pilotage énergétique.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                        <i data-lucide="trending-up" class="h-6 w-6 text-red-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-red-800">Vulnérabilité Face au Marché</h5>
+                            <p class="text-gray-700">Le prix unitaire du gaz a plus que doublé en deux ans. L'analyse en pont démontre que **sans nos efforts, la facture 2024 aurait été encore plus élevée**. La maîtrise de la consommation est notre seule arme face à cette inflation.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <i data-lucide="lightbulb" class="h-6 w-6 text-yellow-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-yellow-800">Recommandation</h5>
+                            <p class="text-gray-700">La réduction de la consommation de gaz doit devenir une priorité absolue. Chaque MWh non consommé est une économie nette face à un marché inflationniste. Envisager des solutions de substitution ou d'efficacité énergétique plus radicales.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================================================================= -->
+        <!--                    ANALYSE DU POSTE EAU                           -->
+        <!-- ================================================================= -->
+        <section id="eau">
+            <h2 class="text-3xl font-bold text-sky-700 mb-6 pb-2 border-b-4 border-sky-200 flex items-center">
+                <i data-lucide="droplet" class="h-8 w-8 mr-3"></i>
+                Analyse du Poste Eau
+            </h2>
+            <div class="bg-white p-6 rounded-xl shadow-md">
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Analyse de l'anomalie de consommation 2024</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution du Coût Annuel (€)</h4>
+                        <canvas id="eauCostChart"></canvas>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4 text-center">Évolution de la Consommation Annuelle (m³)</h4>
+                        <canvas id="eauConsumptionChart"></canvas>
+                    </div>
+                </div>
+                 <div class="mt-8 space-y-4">
+                    <div class="flex items-start p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                        <i data-lucide="search" class="h-6 w-6 text-yellow-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-yellow-800">Identification de l'Anomalie</h5>
+                            <p class="text-gray-700">Notre suivi rigoureux a révélé une **hausse explosive de la consommation de 755%** en 2024, passant de 10 m³ en 2022 à 85,5 m³. Cette détection est un succès de notre système de pilotage, même si elle met en lumière des défis structurels.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
+                        <i data-lucide="wrench" class="h-6 w-6 text-orange-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-orange-800">Analyse des Causes & Contexte</h5>
+                            <p class="text-gray-700">L'ampleur de la hausse confirme l'hypothèse d'une **fuite majeure sur le réseau**. Le délai de détection s'explique par deux facteurs contraignants : une **facturation semestrielle** qui ne permet pas un suivi fin, et un **accès physique difficile au compteur**. Cet incident, bien que regrettable, sert de cas d'école pour renforcer notre réactivité.</p>
+                        </div>
+                    </div>
+                     <div class="flex items-start p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                        <i data-lucide="target" class="h-6 w-6 text-blue-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <div>
+                            <h5 class="font-bold text-blue-800">Recommandations & Plan d'Action</h5>
+                            <p class="text-gray-700">Pour répondre à ce défi, nous nous engageons à :<br>
+                                1. **(Court terme)** Assurer le suivi de l'intervention de réparation jusqu'à résolution complète.<br>
+                                2. **(Moyen terme)** Mettre en place une procédure de relevé physique trimestriel, malgré les difficultés, pour ne plus dépendre uniquement de la facturation.<br>
+                                3. **(Long terme)** Lancer une étude pour l'installation d'un **système de télé-relevé (compteur connecté)**. Cet investissement permettrait une détection des fuites en temps réel et un pilotage précis de cette ressource précieuse.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // --- ACTIVATION DES ICÔNES ---
+        lucide.createIcons();
+        
+        // --- DONNÉES BRUTES VÉRIFIÉES ---
+        const rawData = [
+            // Données 2022
+            { annee: 2022, elec_cout: -2264, gaz_cout: -344.01, eau_cout: 0, eau_conso: 0, elec_conso: 4252, gaz_conso: 20.99 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 924.32, eau_cout: 187.46, eau_conso: 0, elec_conso: 4509, gaz_conso: 19.95 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 870.89, eau_cout: 0, eau_conso: 0, elec_conso: 3668, gaz_conso: 8.44 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 420.69, eau_cout: 0, eau_conso: 0, elec_conso: 3931, gaz_conso: 5.49 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 310.03, eau_cout: 0, eau_conso: 0, elec_conso: 3749, gaz_conso: 0 },
+            { annee: 2022, elec_cout: 5437, gaz_cout: 258.24, eau_cout: 0, eau_conso: 0, elec_conso: 4013, gaz_conso: 0.01 },
+            { annee: 2022, elec_cout: -5437, gaz_cout: -34.57, eau_cout: 0, eau_conso: 0, elec_conso: 3750, gaz_conso: 0 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 134.12, eau_cout: -3.11, eau_conso: 0, elec_conso: 3890, gaz_conso: 0 },
+            { annee: 2022, elec_cout: 6910.12, gaz_cout: 96.82, eau_cout: 0, eau_conso: 0, elec_conso: 3928, gaz_conso: 0 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 97.04, eau_cout: 0, eau_conso: 0, elec_conso: 3670, gaz_conso: 0 },
+            { annee: 2022, elec_cout: 0, gaz_cout: 94.16, eau_cout: 0, eau_conso: 0, elec_conso: 3844, gaz_conso: 0.47 },
+            { annee: 2022, elec_cout: 1855, gaz_cout: 384.19, eau_cout: 0, eau_conso: 10, elec_conso: 4047, gaz_conso: 21.71 },
+            // Données 2023
+            { annee: 2023, elec_cout: -1855, gaz_cout: 656.04, eau_cout: 0, eau_conso: 0, elec_conso: 3681, gaz_conso: 20.85 },
+            { annee: 2023, elec_cout: 0, gaz_cout: 688.21, eau_cout: 228.89, eau_conso: 0, elec_conso: 3899, gaz_conso: 21.01 },
+            { annee: 2023, elec_cout: 0, gaz_cout: 1078.73, eau_cout: 0, eau_conso: 0, elec_conso: 3311, gaz_conso: 6.87 },
+            { annee: 2023, elec_cout: 0, gaz_cout: 598.69, eau_cout: 0, eau_conso: 0, elec_conso: 3548, gaz_conso: 2.21 },
+            { annee: 2023, elec_cout: 0, gaz_cout: 311.27, eau_cout: 0, eau_conso: 0, elec_conso: 3269, gaz_conso: 0 },
+            { annee: 2023, elec_cout: 8105, gaz_cout: 222.36, eau_cout: 0, eau_conso: 0, elec_conso: 3432, gaz_conso: 0.01 },
+            { annee: 2023, elec_cout: -8105, gaz_cout: -28.25, eau_cout: 0, eau_conso: 0, elec_conso: 3187, gaz_conso: 0 },
+            { annee: 2023, elec_cout: 0, gaz_cout: 95.78, eau_cout: 42.78, eau_conso: 0, elec_conso: 3355, gaz_conso: 0 },
+            { annee: 2023, elec_cout: -148.7, gaz_cout: 99.01, eau_cout: -38.12, eau_conso: 0, elec_conso: 3419, gaz_conso: 0.11 },
+            { annee: 2023, elec_cout: 9905.28, gaz_cout: 99.31, eau_cout: 0, eau_conso: 0, elec_conso: 3305, gaz_conso: 0 },
+            { annee: 2023, elec_cout: 2063.02, gaz_cout: 101.24, eau_cout: 0, eau_conso: 0, elec_conso: 3632, gaz_conso: 8.49 },
+            { annee: 2023, elec_cout: 1148.7, gaz_cout: 1576.49, eau_cout: 0, eau_conso: 12, elec_conso: 3722, gaz_conso: 14.97 },
+            // Données 2024
+            { annee: 2024, elec_cout: -1000, gaz_cout: -468.9, eau_cout: 0, eau_conso: 0, elec_conso: 3722, gaz_conso: 17.68 },
+            { annee: 2024, elec_cout: 1537.96, gaz_cout: 1449.63, eau_cout: 249.49, eau_conso: 0, elec_conso: 3597.5, gaz_conso: 12.29 },
+            { annee: 2024, elec_cout: 1565.07, gaz_cout: 1050.67, eau_cout: 0, eau_conso: 0, elec_conso: 3597.5, gaz_conso: 7.08 },
+            { annee: 2024, elec_cout: 0, gaz_cout: 783.7, eau_cout: 0, eau_conso: 0, elec_conso: 3347.5, gaz_conso: 1.04 },
+            { annee: 2024, elec_cout: 1432.33, gaz_cout: 281.09, eau_cout: 0, eau_conso: 0, elec_conso: 3319.5, gaz_conso: 0.53 },
+            { annee: 2024, elec_cout: 770, gaz_cout: 223.3, eau_cout: 0, eau_conso: 0, elec_conso: 3346, gaz_conso: 0 },
+            { annee: 2024, elec_cout: 499.62, gaz_cout: -13.8, eau_cout: 0, eau_conso: 0, elec_conso: 3346, gaz_conso: 0 },
+            { annee: 2024, elec_cout: 0, gaz_cout: 55.89, eau_cout: 248.59, eau_conso: 0, elec_conso: 3694.5, gaz_conso: 0 },
+            { annee: 2024, elec_cout: 1395.53, gaz_cout: 60.31, eau_cout: 0, eau_conso: 0, elec_conso: 3694.5, gaz_conso: 0 },
+            { annee: 2024, elec_cout: 0, gaz_cout: 60.62, eau_cout: -38.85, eau_conso: 0, elec_conso: 3734, gaz_conso: 1.22 },
+            { annee: 2024, elec_cout: 1556.47, gaz_cout: 103.66, eau_cout: 0, eau_conso: 0, elec_conso: 3734, gaz_conso: 8.2 },
+            { annee: 2024, elec_cout: 913, gaz_cout: 2344.13, eau_cout: 0, eau_conso: 85.53, elec_conso: 3202.5, gaz_conso: 17.55 },
+        ];
+
+        function aggregateDataByYear(data) {
+            const totals = {};
+            data.forEach(d => {
+                if (!totals[d.annee]) {
+                    totals[d.annee] = {
+                        electricite: { consommation: 0, cout: 0 },
+                        gaz: { consommation: 0, cout: 0 },
+                        eau: { consommation: 0, cout: 0 },
+                    };
+                }
+                totals[d.annee].electricite.consommation += d.elec_conso;
+                totals[d.annee].electricite.cout += d.elec_cout;
+                totals[d.annee].gaz.consommation += d.gaz_conso;
+                totals[d.annee].gaz.cout += d.gaz_cout;
+                totals[d.annee].eau.consommation += d.eau_conso;
+                totals[d.annee].eau.cout += d.eau_cout;
+            });
+            return totals;
+        }
+
+        const annualTotals = aggregateDataByYear(rawData);
+
+        function calculateBridge(totals, poste, year1, year2) {
+            const data1 = totals[year1][poste];
+            const data2 = totals[year2][poste];
+            const prix1 = data1.consommation > 0 ? data1.cout / data1.consommation : 0;
+            const prix2 = data2.consommation > 0 ? data2.cout / data2.consommation : 0;
+            
+            const effetConso = (data2.consommation - data1.consommation) * prix1;
+            const effetPrix = (prix2 - prix1) * data2.consommation;
+            
+            return {
+                base: { nom: `Coût ${year1}`, valeur: data1.cout },
+                effetConso: { nom: 'Effet Conso', valeur: effetConso },
+                effetPrix: { nom: 'Effet Prix', valeur: effetPrix },
+                final: { nom: `Coût ${year2}`, valeur: data2.cout }
+            };
+        }
+        
+        // --- Électricité ---
+        const elecBridge2022_2023 = calculateBridge(annualTotals, 'electricite', 2022, 2023);
+        const elecBridge2023_2024 = calculateBridge(annualTotals, 'electricite', 2023, 2024);
+        const elecBridgeData2023 = [ { nom: elecBridge2022_2023.base.nom, valeur: elecBridge2022_2023.base.valeur, type: 'base', couleur: '#3B82F6' }, { nom: elecBridge2022_2023.effetConso.nom, valeur: elecBridge2022_2023.effetConso.valeur, type: 'negatif', couleur: '#10B981' }, { nom: elecBridge2022_2023.effetPrix.nom, valeur: elecBridge2022_2023.effetPrix.valeur, type: 'positif', couleur: '#EF4444' }, { nom: elecBridge2022_2023.final.nom, valeur: elecBridge2022_2023.final.valeur, type: 'final', couleur: '#8B5CF6' } ];
+        const elecBridgeData2024 = [ { nom: elecBridge2023_2024.base.nom, valeur: elecBridge2023_2024.base.valeur, type: 'base', couleur: '#8B5CF6' }, { nom: elecBridge2023_2024.effetConso.nom, valeur: elecBridge2023_2024.effetConso.valeur, type: 'positif', couleur: '#EF4444' }, { nom: elecBridge2023_2024.effetPrix.nom, valeur: elecBridge2023_2024.effetPrix.valeur, type: 'negatif', couleur: '#10B981' }, { nom: elecBridge2023_2024.final.nom, valeur: elecBridge2023_2024.final.valeur, type: 'final', couleur: '#3B82F6' } ];
+
+        // --- Gaz ---
+        const gazBridge2022_2023 = calculateBridge(annualTotals, 'gaz', 2022, 2023);
+        const gazBridge2023_2024 = calculateBridge(annualTotals, 'gaz', 2023, 2024);
+        const gazBridgeData2023 = [ { nom: gazBridge2022_2023.base.nom, valeur: gazBridge2022_2023.base.valeur, type: 'base', couleur: '#a16207' }, { nom: gazBridge2022_2023.effetConso.nom, valeur: gazBridge2022_2023.effetConso.valeur, type: 'negatif', couleur: '#10B981' }, { nom: gazBridge2022_2023.effetPrix.nom, valeur: gazBridge2022_2023.effetPrix.valeur, type: 'positif', couleur: '#EF4444' }, { nom: gazBridge2022_2023.final.nom, valeur: gazBridge2022_2023.final.valeur, type: 'final', couleur: '#f97316' } ];
+        const gazBridgeData2024 = [ { nom: gazBridge2023_2024.base.nom, valeur: gazBridge2023_2024.base.valeur, type: 'base', couleur: '#f97316' }, { nom: gazBridge2023_2024.effetConso.nom, valeur: gazBridge2023_2024.effetConso.valeur, type: 'negatif', couleur: '#10B981' }, { nom: gazBridge2023_2024.effetPrix.nom, valeur: gazBridge2023_2024.effetPrix.valeur, type: 'positif', couleur: '#EF4444' }, { nom: gazBridge2023_2024.final.nom, valeur: gazBridge2023_2024.final.valeur, type: 'final', couleur: '#a16207' } ];
+
+
+        function createAnnualBarChart(canvasId, totals, poste, chartLabelKey, unit, color) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(totals),
+                    datasets: [{
+                        label: chartLabelKey,
+                        data: Object.values(totals).map(d => d[poste][chartLabelKey.toLowerCase()]),
+                        backgroundColor: color,
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw.toLocaleString('fr-FR', {maximumFractionDigits: 0})} ${unit}` } } },
+                    scales: { 
+                        y: { 
+                            beginAtZero: true, // CORRECTION APPLIQUÉE POUR ASSURER LA VISIBILITÉ
+                            ticks: { 
+                                callback: v => (unit === '€' ? (v/1000).toFixed(1) + 'k' : v.toLocaleString('fr-FR', {maximumFractionDigits:1})) + ` ${unit}` 
+                            } 
+                        } 
+                    }
+                }
+            });
+        }
+
+        function createBridgeChart(canvasId, chartData) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            const data = {
+                labels: chartData.map(d => d.nom),
+                datasets: [{
+                    data: chartData.map((d, i, arr) => {
+                        if (d.type === 'base' || d.type === 'final') return [0, d.valeur];
+                        let prevValue = arr.slice(0, i).reduce((sum, curr) => {
+                            if (curr.type === 'base') return curr.valeur;
+                            return sum + curr.valeur;
+                        }, 0);
+                        return [prevValue, prevValue + d.valeur];
+                    }),
+                    backgroundColor: chartData.map(d => {
+                        if (d.type === 'base' || d.type === 'final') return d.couleur;
+                        return d.valeur > 0 ? '#EF4444' : '#10B981'; // Rouge pour positif (hausse), Vert pour négatif (baisse)
+                    }),
+                    borderRadius: 4,
+                    borderSkipped: false,
+                }]
+            };
+            new Chart(ctx, {
+                type: 'bar',
+                data: data,
+                options: {
+                    indexAxis: 'x',
+                    responsive: true,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const i = c.dataIndex; return `${chartData[i].nom}: ${chartData[i].valeur > 0 ? '+' : ''}${chartData[i].valeur.toLocaleString('fr-FR', {maximumFractionDigits: 0})} €` } } } },
+                    scales: { y: { beginAtZero: false, ticks: { callback: v => (v / 1000).toFixed(1) + 'k €' } } }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Électricité
+            createAnnualBarChart('electriciteCostChart', annualTotals, 'electricite', 'cout', '€', '#4f46e5');
+            createAnnualBarChart('electriciteConsumptionChart', annualTotals, 'electricite', 'consommation', 'kWh', '#0d9488');
+            createBridgeChart('electriciteBridge2023', elecBridgeData2023);
+            createBridgeChart('electriciteBridge2024', elecBridgeData2024);
+
+            // Gaz
+            createAnnualBarChart('gazCostChart', annualTotals, 'gaz', 'cout', '€', '#f97316');
+            createAnnualBarChart('gazConsumptionChart', annualTotals, 'gaz', 'consommation', 'MWh', '#b45309');
+            createBridgeChart('gazBridge2023', gazBridgeData2023);
+            createBridgeChart('gazBridge2024', gazBridgeData2024);
+
+            // Eau
+            createAnnualBarChart('eauCostChart', annualTotals, 'eau', 'cout', '€', '#0ea5e9');
+            createAnnualBarChart('eauConsumptionChart', annualTotals, 'eau', 'consommation', 'm³', '#0284c7');
+        });
+    </script>
+</body>
+</html>
