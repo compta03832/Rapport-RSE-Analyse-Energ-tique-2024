@@ -66,15 +66,15 @@
                 <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
                     <div>
                         <div class="flex items-center text-sky-600 mb-2">
-                            <i data-lucide="wrench" class="h-7 w-7 mr-2"></i>
+                            <i data-lucide="file-text" class="h-7 w-7 mr-2"></i>
                             <h4 class="font-bold text-lg">Eau</h4>
                         </div>
-                        <p class="text-gray-600 text-sm mb-4">Notre vigilance a permis de détecter une anomalie majeure, démontrant la pertinence de notre suivi.</p>
+                        <p class="text-gray-600 text-sm mb-4">Notre analyse a mis en lumière une anomalie de facturation, révélant un risque jusqu'alors masqué.</p>
                     </div>
                     <div>
                         <p class="text-4xl font-bold text-red-600">+755%</p>
-                        <p class="text-gray-800 font-semibold">Anomalie de conso détectée</p>
-                        <p class="text-gray-500 text-sm">(de 10 à 85,5 m³)</p>
+                        <p class="text-gray-800 font-semibold">Anomalie de facturation détectée</p>
+                        <p class="text-gray-500 text-sm">(Rattrapage sur estimations)</p>
                     </div>
                 </div>
             </div>
@@ -238,7 +238,7 @@
                 Analyse du Poste Eau
             </h2>
             <div class="bg-white p-6 rounded-xl shadow-md">
-                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Analyse de l'anomalie de consommation 2024</h3>
+                <h3 class="text-2xl font-bold text-center text-gray-800 mb-6">Analyse de l'anomalie de facturation 2024</h3>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div>
                         <h4 class="text-lg font-semibold mb-4 text-center">Évolution du Coût Annuel (€)</h4>
@@ -254,24 +254,24 @@
                         <i data-lucide="search" class="h-6 w-6 text-yellow-700 mr-4 mt-1 flex-shrink-0"></i>
                         <div>
                             <h5 class="font-bold text-yellow-800">Identification de l'Anomalie</h5>
-                            <p class="text-gray-700">Notre suivi rigoureux a révélé une **hausse explosive de la consommation de 755%** en 2024, passant de 10 m³ en 2022 à 85,5 m³. Cette détection est un succès de notre système de pilotage, même si elle met en lumière des défis structurels.</p>
+                            <p class="text-gray-700">Notre suivi a révélé une **hausse explosive de la consommation facturée de 755%** en 2024. L'analyse approfondie des factures a permis d'écarter l'hypothèse d'une fuite physique.</p>
                         </div>
                     </div>
                     <div class="flex items-start p-4 bg-orange-50 rounded-lg border-l-4 border-orange-500">
-                        <i data-lucide="wrench" class="h-6 w-6 text-orange-700 mr-4 mt-1 flex-shrink-0"></i>
+                        <i data-lucide="file-text" class="h-6 w-6 text-orange-700 mr-4 mt-1 flex-shrink-0"></i>
                         <div>
-                            <h5 class="font-bold text-orange-800">Analyse des Causes & Contexte</h5>
-                            <p class="text-gray-700">L'ampleur de la hausse confirme l'hypothèse d'une **fuite majeure sur le réseau**. Le délai de détection s'explique par deux facteurs contraignants : une **facturation semestrielle** qui ne permet pas un suivi fin, et un **accès physique difficile au compteur**. Cet incident, bien que regrettable, sert de cas d'école pour renforcer notre réactivité.</p>
+                            <h5 class="font-bold text-orange-800">La Véritable Cause : La Fin des Estimations</h5>
+                            <p class="text-gray-700">L'anomalie est un **rattrapage de facturation**. Depuis 2022, notre facturation était basée sur des **estimations** basses. Le relevé réel effectué en 2024 a consolidé près de deux ans de consommation sous-estimée en une seule facture. Notre démarche RSE a permis de mettre en lumière ce **risque financier et opérationnel** jusqu'alors masqué.</p>
                         </div>
                     </div>
                      <div class="flex items-start p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
                         <i data-lucide="target" class="h-6 w-6 text-blue-700 mr-4 mt-1 flex-shrink-0"></i>
                         <div>
-                            <h5 class="font-bold text-blue-800">Recommandations & Plan d'Action</h5>
+                            <h5 class="font-bold text-blue-800">Nouveau Plan de Pilotage pour l'Eau</h5>
                             <p class="text-gray-700">Pour répondre à ce défi, nous nous engageons à :<br>
-                                1. **(Court terme)** Assurer le suivi de l'intervention de réparation jusqu'à résolution complète.<br>
-                                2. **(Moyen terme)** Mettre en place une procédure de relevé physique trimestriel, malgré les difficultés, pour ne plus dépendre uniquement de la facturation.<br>
-                                3. **(Long terme)** Lancer une étude pour l'installation d'un **système de télé-relevé (compteur connecté)**. Cet investissement permettrait une détection des fuites en temps réel et un pilotage précis de cette ressource précieuse.
+                                1. **(Maîtrise Budgétaire)** Intégrer cette consommation réelle dans nos futurs budgets pour éliminer les surprises.<br>
+                                2. **(Pilotage Proactif)** Mettre en place une procédure de **relevé interne trimestriel** du compteur, malgré son accès difficile, pour disposer de nos propres données.<br>
+                                3. **(Partenariat Fournisseur)** Contacter le fournisseur pour demander des **relevés réels plus fréquents** ou étudier la faisabilité d'un passage au **télé-relevé** pour un suivi en temps réel.
                             </p>
                         </div>
                     </div>
@@ -398,7 +398,7 @@
                     plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.raw.toLocaleString('fr-FR', {maximumFractionDigits: 0})} ${unit}` } } },
                     scales: { 
                         y: { 
-                            beginAtZero: true, // CORRECTION APPLIQUÉE POUR ASSURER LA VISIBILITÉ
+                            beginAtZero: true,
                             ticks: { 
                                 callback: v => (unit === '€' ? (v/1000).toFixed(1) + 'k' : v.toLocaleString('fr-FR', {maximumFractionDigits:1})) + ` ${unit}` 
                             } 
